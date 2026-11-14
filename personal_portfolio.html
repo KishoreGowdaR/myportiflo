@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal portfolio of Your Name — engineering student, developer and project builder.">
+  <title>Your Name | Portfolio</title>
+  <style>
+    :root {
+      --bg: #081426;
+      --panel: #101f35;
+      --panel-light: #152943;
+      --text: #eef4ff;
+      --muted: #a7b5c9;
+      --orange: #ff8a3d;
+      --orange-light: #ffb071;
+      --line: rgba(255,255,255,.10);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(8,20,38,.90); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -.04em; }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .94rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--orange-light); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); background: var(--panel);
+      color: var(--text); border-radius: 10px; padding: 8px 11px; cursor: pointer;
+    }
+    .hero { padding: 112px 0 100px; display: grid; grid-template-columns: 1.35fr .65fr; align-items: center; gap: 55px; }
+    .eyebrow { color: var(--orange-light); font-size: .82rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 18px 0; font-size: clamp(2.7rem, 7vw, 5.3rem); line-height: 1.04; letter-spacing: -.065em; }
+    h1 span { color: var(--orange); }
+    .hero-copy { max-width: 640px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 9px; font-weight: 750; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--orange); color: #1b1720; }
+    .btn-primary:hover { background: var(--orange-light); }
+    .btn-outline { border: 1px solid var(--line); color: var(--text); }
+    .hero-card {
+      min-height: 300px; border: 1px solid rgba(255,138,61,.25); border-radius: 24px;
+      background: radial-gradient(circle at 80% 20%, rgba(255,138,61,.18), transparent 42%), var(--panel);
+      display: grid; place-items: center; padding: 30px; text-align: center;
+    }
+    .avatar { width: 142px; height: 142px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 18px; background: linear-gradient(135deg, #ffb071, #ff7a35); color: #172033; font-size: 3rem; font-weight: 900; }
+    .hero-card p { color: var(--muted); font-size: .92rem; }
+    section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-kicker { color: var(--orange); font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h2 { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -.045em; margin: 8px 0 28px; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: start; }
+    .about-text { color: var(--muted); max-width: 700px; }
+    .about-text p + p { margin-top: 15px; }
+    .info-box { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+    .info-box strong { color: var(--orange-light); display: block; margin-bottom: 8px; }
+    .info-box p { color: var(--muted); }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .skill { padding: 19px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; font-weight: 700; }
+    .skill small { display: block; color: var(--muted); font-weight: 450; margin-top: 4px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 25px; display: flex; flex-direction: column; min-height: 270px; transition: transform .2s, border-color .2s; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(255,138,61,.55); }
+    .project-number { color: var(--orange); font-weight: 850; font-size: .82rem; }
+    .project-card h3 { margin: 12px 0 9px; font-size: 1.2rem; }
+    .project-card p { color: var(--muted); font-size: .94rem; flex: 1; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tag { border: 1px solid var(--line); border-radius: 99px; padding: 4px 9px; color: var(--orange-light); font-size: .75rem; }
+    .contact-box { background: linear-gradient(120deg, rgba(255,138,61,.13), transparent 70%), var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: clamp(25px, 5vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .contact-box p { color: var(--muted); max-width: 560px; }
+    footer { padding: 26px 0; color: var(--muted); font-size: .88rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    :focus-visible { outline: 3px solid var(--orange-light); outline-offset: 3px; }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; padding: 78px 0; gap: 35px; }
+      .hero-card { min-height: 240px; }
+      .about-grid { grid-template-columns: 1fr; gap: 25px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .contact-box { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        display: none; position: absolute; top: 68px; left: 0; right: 0;
+        padding: 18px 22px 22px; background: #0b192d; border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: flex-start; gap: 17px;
+      }
+      .nav-links.open { display: flex; }
+      section { padding: 65px 0; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { gap: 10px; }
+      .skill { padding: 15px; }
+      .hero { padding: 68px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="logo" href="#home">YOUR<span>NAME</span>.</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container hero" id="home">
+      <div>
+        <p class="eyebrow">Hello, I'm</p>
+        <h1>Your Name.<br><span>Curious mind.</span><br>Future engineer.</h1>
+        <p class="hero-copy">I'm a first-year engineering student who enjoys learning how technology works and turning ideas into practical projects. I'm currently building my skills in programming, electronics and problem-solving.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">Explore my work</a>
+          <a class="btn btn-outline" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Introduction card">
+        <div>
+          <div class="avatar" aria-hidden="true">YN</div>
+          <h3>Engineering Student</h3>
+          <p>Learning • Building • Improving</p>
+        </div>
+      </aside>
+    </div>
+
+    <section id="about">
+      <div class="container">
+        <p class="section-kicker">A little about me</p>
+        <h2>About me</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>I'm an aspiring developer and engineering student interested in creating useful technology. I like exploring new tools, understanding how hardware and software work together, and learning by building.</p>
+            <p>My current focus is strengthening my foundations in web development, Python, embedded systems and AI/ML. I'm always open to collaborating, learning from others and taking on new challenges.</p>
+          </div>
+          <div class="info-box">
+            <strong>What I'm working towards</strong>
+            <p>Becoming a well-rounded engineer who can take a problem from an initial idea to a working prototype.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <p class="section-kicker">What I use</p>
+        <h2>Skills & learning</h2>
+        <div class="skills-grid">
+          <div class="skill">HTML & CSS<small>Web fundamentals</small></div>
+          <div class="skill">Python<small>Programming basics</small></div>
+          <div class="skill">C programming<small>Core concepts</small></div>
+          <div class="skill">ESP32<small>Embedded systems</small></div>
+          <div class="skill">Sensors & circuits<small>Electronics basics</small></div>
+          <div class="skill">AI / ML<small>Currently learning</small></div>
+          <div class="skill">Problem solving<small>Logical thinking</small></div>
+          <div class="skill">Git & GitHub<small>Version control — learning</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <p class="section-kicker">Things I'm building</p>
+        <h2>Selected projects</h2>
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-number">PROJECT 01</span>
+            <h3>TerrainSense</h3>
+            <p>A rover concept that explores load-aware movement and terrain-risk sensing to help improve stability and energy use across changing ground conditions.</p>
+            <div class="tags"><span class="tag">Robotics</span><span class="tag">Sensors</span><span class="tag">Embedded</span></div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Pre-Sense</h3>
+            <p>A prototype concept for early hazard awareness using environmental sensors and a camera-based flame-detection setup.</p>
+            <div class="tags"><span class="tag">ESP32</span><span class="tag">IoT</span><span class="tag">Safety</span></div>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 03</span>
+            <h3>NFC Review Cards</h3>
+            <p>A simple concept for helping local businesses make it easier for customers to open a review page using a tap-enabled NFC card.</p>
+            <div class="tags"><span class="tag">NFC</span><span class="tag">Product idea</span><span class="tag">Web</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <p class="section-kicker">Let's connect</p>
+        <h2>Have an idea? Let's talk.</h2>
+        <div class="contact-box">
+          <div>
+            <h3>I'm open to learning and collaborating.</h3>
+            <p>For project discussions, collaborations or opportunities, feel free to send me an email. Replace the sample email address with your own before publishing.</p>
+          </div>
+          <a class="btn btn-primary" href="mailto:your.email@example.com">Email me ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Your Name. Built with HTML & CSS.</span>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
